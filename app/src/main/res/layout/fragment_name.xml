@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/txtnombre"
         android:layout_width="338dp"
         android:layout_height="54dp"
         android:layout_marginTop="72dp"
@@ -30,12 +30,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnComenzar"
         android:layout_width="123dp"
         android:layout_height="69dp"
         android:layout_marginTop="136dp"
-        android:text="Button"
+        android:text="Entrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/txtnombre" />
 </androidx.constraintlayout.widget.ConstraintLayout>

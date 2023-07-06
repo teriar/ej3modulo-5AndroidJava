@@ -3,10 +3,15 @@ package com.example.cl.ejercicioindividual3modulo5;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.cl.ejercicioindividual3modulo5.databinding.ActivityMainBinding;
+import com.example.cl.ejercicioindividual3modulo5.databinding.FragmentNameBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,27 +29,12 @@ public class FragmentName extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private FragmentNameBinding binding;
     public FragmentName() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentName.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentName newInstance(String param1, String param2) {
-        FragmentName fragment = new FragmentName();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +49,20 @@ public class FragmentName extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_name, container, false);
+       binding = FragmentNameBinding.inflate(getLayoutInflater(),
+               container,false);
+
+       binding.btnComenzar.setOnClickListener(v -> {
+           String nombre = binding.txtnombre.getText().toString();
+           if(nombre.isEmpty()){
+               return;
+
+           }
+           Bundle bundle = new Bundle();
+           bundle.putString("nombre", nombre);
+           Navigation.findNavController(getView()).navigate(R.id.action_fragmentName_to_fragmentTrivia, bundle);
+       });
+
+        return binding.getRoot();
     }
 }

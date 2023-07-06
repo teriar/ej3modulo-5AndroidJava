@@ -3,10 +3,14 @@ package com.example.cl.ejercicioindividual3modulo5;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.cl.ejercicioindividual3modulo5.databinding.FragmentNameBinding;
+import com.example.cl.ejercicioindividual3modulo5.databinding.FragmentRespuestaBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +24,7 @@ public class FragmentRespuesta extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private FragmentRespuestaBinding binding;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -50,8 +55,8 @@ public class FragmentRespuesta extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getString("respuesta");
+            mParam2 = getArguments().getString("nombre");
         }
     }
 
@@ -59,6 +64,18 @@ public class FragmentRespuesta extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_respuesta, container, false);
+        binding = FragmentRespuestaBinding.inflate(getLayoutInflater(),
+                container,false);
+
+        binding.txtrespuesta.setText(mParam1);
+
+
+        binding.btnVolver.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("nombre", mParam2);
+            Navigation.findNavController(getView()).navigate(R.id.action_fragmentRespuesta_to_fragmentTrivia, bundle);
+        });
+
+        return binding.getRoot();
     }
 }
